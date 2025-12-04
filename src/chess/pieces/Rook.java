@@ -13,4 +13,10 @@ public class Rook  extends ChessPiece {
     public String toString(){
         return "R"; // ou "T" em portugues de Torre
     }
+
+    @Override
+    public boolean[][] possibleMoves() {
+        boolean [][] matriz = new boolean[getBoard().getRows()][getBoard().getColumns()];
+        return matriz;
+    }
 }
