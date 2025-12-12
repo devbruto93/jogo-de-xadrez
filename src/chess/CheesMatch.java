@@ -7,11 +7,24 @@ import chess.pieces.King;
 import chess.pieces.Rook;
 
 public class CheesMatch {
+
+    private int turn;
+    private Color currentPlayer;
     private Board board;
 
     public CheesMatch() {
         board = new Board(8,8);//É DEVER DESTA CLASSE SABER AS DIMENÇOES DO TABULEIRO
+        turn = 1;
+        currentPlayer = Color.WHITE;
         initialSetup();
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public Color getCurrentPlayer() {
+        return currentPlayer;
     }
 
     public ChessPiece[][] getPieces(){
@@ -36,6 +49,7 @@ public class CheesMatch {
         validateSourcePosition(source);
         validateTargetPosition(source, target);
         Piece capturePiece = makeMove(source, target);
+        nextTurn();
         return (ChessPiece)capturePiece;
     }
 
@@ -50,6 +64,9 @@ public class CheesMatch {
         if (!board.thereIsAPiece(position)){
             throw new ChessException("Não há nenhuma peça na posição de origem!");
         }
+        if (currentPlayer != ((ChessPiece)board.piece(position)).getColor()){//downcasting para o metodo .getColor funcionar nessa classe.
+            throw new ChessException("Essa peça não é sua!");
+        }
         if (!board.piece(position).isThereAnyPossibleMove()){
             throw new ChessException("Não é possivel mover essa peça!");
         }
@@ -59,6 +76,11 @@ public class CheesMatch {
         if (!board.piece(source).possibleMove(target)){
             throw new ChessException("A peça nao pode se mover para a posição de destino!");
         }
+    }
+
+    private void nextTurn(){
+        turn++;
+        currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
     }
 
     private void placeNewPiece(char column, int row, ChessPiece piece){
