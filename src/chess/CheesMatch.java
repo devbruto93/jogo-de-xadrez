@@ -8,12 +8,14 @@ import chess.pieces.Rook;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CheesMatch {
 
     private int turn;
     private Color currentPlayer;
     private Board board;
+    private boolean check;
 
     private List<Piece> piecesOnTheBoard = new ArrayList<>();
     private List<Piece> capturedPieces = new ArrayList<>();
@@ -71,6 +73,17 @@ public class CheesMatch {
         return capturedPiece;
     }
 
+    private void undoMove(Position source, Position target, Piece capturedPiece){
+        Piece peça = board.removePiece(target);
+        board.placePiece(peça, source);
+
+        if (capturedPiece != null){
+            board.placePiece(capturedPiece, target);
+            capturedPieces.remove(capturedPiece);
+            piecesOnTheBoard.add(capturedPiece);
+        }
+    }
+
     private void validateSourcePosition(Position position){
         if (!board.thereIsAPiece(position)){
             throw new ChessException("Não há nenhuma peça na posição de origem!");
@@ -92,6 +105,20 @@ public class CheesMatch {
     private void nextTurn(){
         turn++;
         currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
+    }
+
+    private Color opponent(Color color){
+        return (color == Color.WHITE) ? Color.BLACK : Color.WHITE;
+    }
+
+    private ChessPiece king(Color color){
+        List<Piece> list = piecesOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor() == color).collect(Collectors.toList());
+        for (Piece peça: list){
+            if (peça instanceof King){
+                return (ChessPiece) peça;
+            }
+        }
+        throw new IllegalStateException("Não há Rei com essa cor no tabuleiro!");//se esse erro aparecer é porque algo quebrou no sistema por isso nao sera tratana na classe principal.
     }
 
     private void placeNewPiece(char column, int row, ChessPiece piece){
