@@ -64,7 +64,7 @@ public class CheesMatch {
 
         if (testCheck(currentPlayer)){
             undoMove(source, target, capturePiece);
-            throw new ChessException("Você não pode se colocar em cheque!");
+            throw new ChessException("Você não pode se colocar em xeque!");
         }
         check = (testCheck(opponent(currentPlayer))) ? true : false;
         nextTurn();

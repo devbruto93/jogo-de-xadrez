@@ -12,7 +12,7 @@ public class Rook  extends ChessPiece {
 
     @Override
     public String toString(){
-        return "R"; // ou "T" em portugues de Torre
+        return "T"; // ou "R" em ingles de Rook
     }
 
     @Override

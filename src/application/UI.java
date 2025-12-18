@@ -60,7 +60,7 @@ public class UI {
         System.out.println("Turn : " + cheesMatch.getTurn());
         System.out.println("Aguardando o jogador das peças: " + cheesMatch.getCurrentPlayer());
         if (cheesMatch.getCheck()){
-            System.out.println("CHEQUE!");
+            System.out.println("XEQUE!");
         }
     }
 
