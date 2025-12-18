@@ -35,6 +35,10 @@ public class CheesMatch {
         return currentPlayer;
     }
 
+    public boolean getCheck(){
+        return check;
+    }
+
     public ChessPiece[][] getPieces(){
         ChessPiece[][] mat = new ChessPiece[board.getRows()][board.getColumns()];
         for (int i=0; i<board.getRows(); i++){
@@ -57,6 +61,12 @@ public class CheesMatch {
         validateSourcePosition(source);
         validateTargetPosition(source, target);
         Piece capturePiece = makeMove(source, target);
+
+        if (testCheck(currentPlayer)){
+            undoMove(source, target, capturePiece);
+            throw new ChessException("Você não pode se colocar em cheque!");
+        }
+        check = (testCheck(opponent(currentPlayer))) ? true : false;
         nextTurn();
         return (ChessPiece)capturePiece;
     }
@@ -119,6 +129,18 @@ public class CheesMatch {
             }
         }
         throw new IllegalStateException("Não há Rei com essa cor no tabuleiro!");//se esse erro aparecer é porque algo quebrou no sistema por isso nao sera tratana na classe principal.
+    }
+
+    private boolean testCheck(Color color){
+        Position kinPosition = king(color).getChessPosition().toPosition();
+        List<Piece> opponentPices = piecesOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor() == opponent(color)).collect(Collectors.toList());
+        for (Piece peça : opponentPices){
+            boolean[][] matriz = peça.possibleMoves();
+            if (matriz[kinPosition.getRow()][kinPosition.getColumn()]){
+                return true;
+            }
+        }
+        return false;
     }
 
     private void placeNewPiece(char column, int row, ChessPiece piece){
