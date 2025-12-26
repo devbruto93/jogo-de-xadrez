@@ -58,9 +58,15 @@ public class UI {
         printCapturedPieces(captured);
         System.out.println();
         System.out.println("Turn : " + cheesMatch.getTurn());
-        System.out.println("Aguardando o jogador das peças: " + cheesMatch.getCurrentPlayer());
-        if (cheesMatch.getCheck()){
-            System.out.println("XEQUE!");
+        if (!cheesMatch.getCheckMate()) {
+            System.out.println("Aguardando o jogador das peças: " + cheesMatch.getCurrentPlayer());
+            if (cheesMatch.getCheck()) {
+                System.out.println("XEQUE!");
+            }
+        }
+        else {
+            System.out.println("CHEQUE MATE!");
+            System.out.println("Vencedor: " + cheesMatch.getCurrentPlayer());
         }
     }
 
