@@ -1,10 +1,9 @@
 package application;
 
-import chess.CheesMatch;
+import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
 import chess.Color;
-import jdk.swing.interop.SwingInterOpUtils;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -52,21 +51,21 @@ public class UI {
         }
     }
 
-    public static void printMatch(CheesMatch cheesMatch,List<ChessPiece> captured ){
-        printBoard(cheesMatch.getPieces());
+    public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured ){
+        printBoard(chessMatch.getPieces());
         System.out.println();
         printCapturedPieces(captured);
         System.out.println();
-        System.out.println("Turn : " + cheesMatch.getTurn());
-        if (!cheesMatch.getCheckMate()) {
-            System.out.println("Aguardando o jogador das peças: " + cheesMatch.getCurrentPlayer());
-            if (cheesMatch.getCheck()) {
+        System.out.println("Turn : " + chessMatch.getTurn());
+        if (!chessMatch.getCheckMate()) {
+            System.out.println("Aguardando o jogador das peças: " + chessMatch.getCurrentPlayer());
+            if (chessMatch.getCheck()) {
                 System.out.println("XEQUE!");
             }
         }
         else {
             System.out.println("CHEQUE MATE!");
-            System.out.println("Vencedor: " + cheesMatch.getCurrentPlayer());
+            System.out.println("Vencedor: " + chessMatch.getCurrentPlayer());
         }
     }
 

@@ -2,17 +2,17 @@ package chess.pieces;
 
 import boardgame.Board;
 import boardgame.Position;
-import chess.CheesMatch;
+import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.Color;
 
 public class King extends ChessPiece {
 
-    private CheesMatch cheesMatch;
+    private ChessMatch chessMatch;
 
-    public King(Board board, Color color, CheesMatch cheesMatch) {
+    public King(Board board, Color color, ChessMatch chessMatch) {
         super(board, color);
-        this.cheesMatch = cheesMatch;
+        this.chessMatch = chessMatch;
     }
 
     @Override
@@ -84,7 +84,7 @@ public class King extends ChessPiece {
             matriz[piece.getRow()][piece.getColumn()] = true;
         }
         //roque pequeno
-        if (getMoveCount() == 0 && !cheesMatch.getCheck()){
+        if (getMoveCount() == 0 && !chessMatch.getCheck()){
             Position posT1 = new Position(position.getRow(), position.getColumn() +3);
             if (testRookCastling(posT1)){
                 Position p1 = new Position(position.getRow(), position.getColumn() +1);
