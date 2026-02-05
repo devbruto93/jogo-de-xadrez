@@ -47,7 +47,7 @@ public class Pawn extends ChessPiece {
                     mat[esquerda.getRow() -1][esquerda.getColumn()] = true;
                 }
                 Position direita = new Position(position.getRow(), position.getColumn() +1);
-                if (getBoard().positionExists(direita) && isThereOpponentPiece(direita) && getBoard().piece(esquerda) == chessMatch.getEnPassantVulnerable()){
+                if (getBoard().positionExists(direita) && isThereOpponentPiece(direita) && getBoard().piece(direita) == chessMatch.getEnPassantVulnerable()){
                     mat[direita.getRow() -1][direita.getColumn()] = true;
                 }
             }
@@ -78,7 +78,7 @@ public class Pawn extends ChessPiece {
                     mat[esquerda.getRow() +1][esquerda.getColumn()] = true;
                 }
                 Position direita = new Position(position.getRow(), position.getColumn() +1);
-                if (getBoard().positionExists(direita) && isThereOpponentPiece(direita) && getBoard().piece(esquerda) == chessMatch.getEnPassantVulnerable()){
+                if (getBoard().positionExists(direita) && isThereOpponentPiece(direita) && getBoard().piece(direita) == chessMatch.getEnPassantVulnerable()){
                     mat[direita.getRow() +1][direita.getColumn()] = true;
                 }
             }
