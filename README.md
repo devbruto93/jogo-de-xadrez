@@ -1,4 +1,4 @@
-# Jogo de xadrez completo com as jogadas Rock, enPassant e Promoção implementadas!
+# Jogo de xadrez completo com as jogadas Roque, enPassant e Promoção implementadas!
 ## Aqui está um projeto de jogo de xadrez do curso de Java do Nélio Alves, referência como professor de Java e C#.
 
 ## Pude aprofundar mais um pouco sobre orientação a objetos, programação defensiva, uso do (if) para testar as jogadas permitidas.
